@@ -313,8 +313,7 @@ void loop() {
 topic_mqtt_init();
 
  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Arduino Reset
-//if ( millis()  >= 780000) resetFunc(); // Reset alle 13 Min
-if ( millis()  >= 780000) resetFunc(); // Reset alle 13 Min
+if ( millis()  >= 172800000) resetFunc(); // Reset alle zwei Tage
 
 
 
