@@ -141,8 +141,7 @@ Benötigte Variable
     client.publish("Meldungen/Warnleuchte001/x2", "online");
     client.publish("Meldungen/Warnleuchte001/x3", "online");
     client.publish("Meldungen/Warnleuchte001/hupe", "online");
-    */
-  }
+      }
 }
 
 //************************************************************************** mqtt - reconnect
