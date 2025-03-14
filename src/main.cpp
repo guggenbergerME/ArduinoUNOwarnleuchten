@@ -27,17 +27,15 @@
 #include <Wire.h>
 
 /************************************************************************** Warnleuchten belegung
-Relais    Farbe     Funktion
-K0        grün      1/0
-K1        gelb      1/0
-K2        rot       1/0
-*/
-
-/************************************************************************** Kabelcode
-gn        SDA
-gn/ 1sw   SDC
-gr        GND
-rt        +5V
+Relais    Farbe     
+K0        grün      DQ
+K1        gelb      DQ
+K2        rot       DQ
+K3        blau      DQ
+K4        x1        DQ
+K5        x2        DQ
+K6        x3        DQ
+K7        hupe      DQ
 */
 
 /************************************************************************** Pinbelegung Arduino UNO
@@ -138,12 +136,11 @@ Benötigte Variable
     client.publish("Meldungen/Warnleuchte001/gruen", "online");
     client.publish("Meldungen/Warnleuchte001/gelb", "online");    
     client.publish("Meldungen/Warnleuchte001/rot", "online");
-    /*
-    client.publish("Meldungen/Warnleuchte001/K3", "online");    
-    client.publish("Meldungen/Warnleuchte001/K4", "online");    
-    client.publish("Meldungen/Warnleuchte001/K5", "online");
-    client.publish("Meldungen/Warnleuchte001/K6", "online");
-    client.publish("Meldungen/Warnleuchte001/K7", "online");
+    client.publish("Meldungen/Warnleuchte001/blau", "online");    
+    client.publish("Meldungen/Warnleuchte001/x1", "online");    
+    client.publish("Meldungen/Warnleuchte001/x2", "online");
+    client.publish("Meldungen/Warnleuchte001/x3", "online");
+    client.publish("Meldungen/Warnleuchte001/hupe", "online");
     */
   }
 }
@@ -156,14 +153,12 @@ void reconnect() {
       Serial.println("verbunden");
       client.subscribe("Meldungen/Warnleuchte001/gruen");
       client.subscribe("Meldungen/Warnleuchte001/gelb");
-      client.subscribe("Meldungen/Warnleuchte001/rot");
-      /*
-      client.subscribe("Meldungen/Warnleuchte001/K3");
-      client.subscribe("Meldungen/Warnleuchte001/K4");
-      client.subscribe("Meldungen/Warnleuchte001/K5");
-      client.subscribe("Meldungen/Warnleuchte001/K6");
-      client.subscribe("Meldungen/Warnleuchte001/K7");                                    
-      */
+      client.subscribe("Meldungen/Warnleuchte001/rot");    
+      client.subscribe("Meldungen/Warnleuchte001/blau");
+      client.subscribe("Meldungen/Warnleuchte001/x1");
+      client.subscribe("Meldungen/Warnleuchte001/x2");
+      client.subscribe("Meldungen/Warnleuchte001/x3");
+      client.subscribe("Meldungen/Warnleuchte001/hupe");                                    
     } else {
       Serial.print("Fehler, rc=");
       Serial.print(client.state());
@@ -188,104 +183,102 @@ void callback(char* topic, byte* payload, unsigned int length) {
   
   Serial.println(message);
 
-// -------------------------------------------------------- Topic Auswerten K0
+// -------------------------------------------------------- Topic Auswerten K0 gruen
     if (String(topic) == "Meldungen/Warnleuchte001/gruen") {
       if (message == "on") {
-          Serial.println("Relais K0 -> AN");
+          Serial.println("Relais K0 gruen -> AN");
           pcf8574.digitalWrite(P0, !HIGH);
       } 
       else if (message == "off") {
-          Serial.println("Relais K0 -> AUS");
+          Serial.println("Relais K0 gruen -> AUS");
           pcf8574.digitalWrite(P0, !LOW);
       } 
       else { }} else { }
 
-// -------------------------------------------------------- Topic Auswerten K1
+// -------------------------------------------------------- Topic Auswerten K1 gelb
     if (String(topic) == "Meldungen/Warnleuchte001/gelb") {
       if (message == "on") {
-          Serial.println("Relais K1 -> AN");
+          Serial.println("Relais K1 gelb -> AN");
           pcf8574.digitalWrite(P1, !HIGH);
       } 
       else if (message == "off") {
-          Serial.println("Relais K1-> AUS");
+          Serial.println("Relais K1 gelb -> AUS");
           pcf8574.digitalWrite(P1, !LOW);
       } 
       else { }} else { }
 
-// -------------------------------------------------------- Topic Auswerten K2
+// -------------------------------------------------------- Topic Auswerten K2 rot
     if (String(topic) == "Meldungen/Warnleuchte001/rot") {
       if (message == "on") {
-          Serial.println("Relais K2 -> AN");
+          Serial.println("Relais K2 rot -> AN");
           pcf8574.digitalWrite(P2, !HIGH);
       } 
       else if (message == "off") {
-          Serial.println("Relais K2-> AUS");
+          Serial.println("Relais K2 rot-> AUS");
           pcf8574.digitalWrite(P2, !LOW);
       } 
       else { }} else { }
 
-/*
-// -------------------------------------------------------- Topic Auswerten K3
-    if (String(topic) == "Meldungen/Warnleuchte001/K3") {
+
+// -------------------------------------------------------- Topic Auswerten K3 blau
+    if (String(topic) == "Meldungen/Warnleuchte001/blau") {
       if (message == "on") {
-          Serial.println("Relais K3 -> AN");
+          Serial.println("Relais K3 blau -> AN");
           pcf8574.digitalWrite(P3, !HIGH);
       } 
       else if (message == "off") {
-          Serial.println("Relais K3-> AUS");
+          Serial.println("Relais K3 blau -> AUS");
           pcf8574.digitalWrite(P3, !LOW);
       } 
       else { }} else { }
 
-// -------------------------------------------------------- Topic Auswerten K4
-    if (String(topic) == "Meldungen/Warnleuchte001/K4") {
+// -------------------------------------------------------- Topic Auswerten K4 x1
+    if (String(topic) == "Meldungen/Warnleuchte001/x1") {
       if (message == "on") {
-          Serial.println("Relais K4 -> AN");
+          Serial.println("Relais K4 x1 -> AN");
           pcf8574.digitalWrite(P4, !HIGH);
       } 
       else if (message == "off") {
-          Serial.println("Relais K4-> AUS");
+          Serial.println("Relais K4 x1 -> AUS");
           pcf8574.digitalWrite(P4, !LOW);
       } 
       else { }} else { }
 
-// -------------------------------------------------------- Topic Auswerten K5
-    if (String(topic) == "Meldungen/Warnleuchte001/K5") {
+// -------------------------------------------------------- Topic Auswerten K5 x2
+    if (String(topic) == "Meldungen/Warnleuchte001/x2") {
       if (message == "on") {
-          Serial.println("Relais K5 -> AN");
+          Serial.println("Relais K5 x2 -> AN");
           pcf8574.digitalWrite(P5, !HIGH);
       } 
       else if (message == "off") {
-          Serial.println("Relais K5-> AUS");
+          Serial.println("Relais K5 x2 -> AUS");
           pcf8574.digitalWrite(P5, !LOW);
       } 
       else { }} else { }
 
-// -------------------------------------------------------- Topic Auswerten K6
-    if (String(topic) == "Meldungen/Warnleuchte001/K6") {
+// -------------------------------------------------------- Topic Auswerten K6 x3
+    if (String(topic) == "Meldungen/Warnleuchte001/x3") {
       if (message == "on") {
-          Serial.println("Relais K6 -> AN");
+          Serial.println("Relais K6 x3 -> AN");
           pcf8574.digitalWrite(P6, !HIGH);
       } 
       else if (message == "off") {
-          Serial.println("Relais K6-> AUS");
+          Serial.println("Relais K6 x3 -> AUS");
           pcf8574.digitalWrite(P6, !LOW);
       } 
       else { }} else { }
 
-// -------------------------------------------------------- Topic Auswerten K7
-    if (String(topic) == "Meldungen/Warnleuchte001/K7") {
+// -------------------------------------------------------- Topic Auswerten K7 hupe
+    if (String(topic) == "Meldungen/Warnleuchte001/hupe") {
       if (message == "on") {
-          Serial.println("Relais K7 -> AN");
+          Serial.println("Relais K7 hupe -> AN");
           pcf8574.digitalWrite(P7, !HIGH);
       } 
       else if (message == "off") {
-          Serial.println("Relais K7-> AUS");
+          Serial.println("Relais K7 hupe -> AUS");
           pcf8574.digitalWrite(P7, !LOW);
       } 
       else { }} else { }      
-
-*/
 
 }
 
