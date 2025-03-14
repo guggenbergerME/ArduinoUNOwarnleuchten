@@ -302,10 +302,11 @@ void loop() {
 
     
 // Mqtt Topic einmalig beim Start INIT
-topic_mqtt_init();
+//topic_mqtt_init();
 
  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Arduino Reset
-if ( millis()  >= 172800000) resetFunc(); // Reset alle zwei Tage
+//if ( millis()  >= 172800000) resetFunc(); // Reset alle zwei Tage
+//if ( millis()  >= 30000) resetFunc(); // Reset alle zwei Tage
 
 
 
