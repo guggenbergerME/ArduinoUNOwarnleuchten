@@ -49,7 +49,7 @@ PCF8574 pcf8574(0x20);
 
 //************************************************************************** LAN Network definieren 
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0x00, 0x08 };
-IPAddress ip(10, 110, 0, 5); //comment this line if you are using DHCP
+IPAddress ip(10, 110, 0, 13); //comment this line if you are using DHCP
 
 //IPAddress subnet(255, 255, 0, 0); // Subnet Mask
 
@@ -302,11 +302,11 @@ void loop() {
 
     
 // Mqtt Topic einmalig beim Start INIT
-//topic_mqtt_init();
+topic_mqtt_init();
 
  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Arduino Reset
-//if ( millis()  >= 172800000) resetFunc(); // Reset alle zwei Tage
-//if ( millis()  >= 30000) resetFunc(); // Reset alle zwei Tage
+if ( millis()  >= 86400000) resetFunc(); // Reset alle zwei Tage
+if ( millis()  >= 30000) resetFunc(); // Reset alle zwei Tage
 
 
 
